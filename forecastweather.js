@@ -21,9 +21,6 @@ const html = `
 }
 
 </style>
-<p class="env-info">データ取得時刻</p>
-<p class="env-info"><span id="data-fetch-time">-</span> </p>
-<p class="env-info">Weather: <span id="weather">-</span></p>
 <div style="width: 90%; padding:20px;">
 <canvas id="canvas"></canvas>
 </div>
@@ -39,8 +36,6 @@ const html = `
   function fetchData(){
     // if (!property) return Promise.resolve();
     const query_params = new URLSearchParams({
-      // id:1853908,
-      // appid:"eab978b11202cc3c9daa14445bb3648f",
       id:property.cityId,
       appid:property.apiKey,
       units:"metric"});
@@ -50,40 +45,18 @@ const html = `
         }).then(r => {
           if (!r) return;
           weatherData = r; 
-          console.log(weatherData); 
           return weatherData;
         });
       }
 
 
   
-//   const query_params = new URLSearchParams({
-//     id:1853908,
-//     appid:"eab978b11202cc3c9daa14445bb3648f",
-//     // id:property.cityId,
-//     // appid:property.apiKey,
-//     units:"metric"});
-
-//   fetch("https://api.openweathermap.org/data/2.5/forecast?" + query_params)
-// .then(response => {
-//     return response.json()
-// })
-// .then(data => {
-//     var fetchedData = data;
-//     console.log(data);
-//     console.log(data.list);
-// })
-
-// let weathera = getForecastValue(fetchedData);
-
 
   function updateLayers() {
     return fetchData().then(d => {
       if (!d) return;
       const apiData = d;
-      console.log(apiData);
       const weather = getForecastValue(apiData);
-      console.log(weather);
       updateChart(weather)
       });
     return;
@@ -132,13 +105,13 @@ const html = `
 const config={
   type: 'bar',
   data: {
-    labels: [1642960800000, 1642971600000, 1642982400000, 1642993200000, 1643004000000, 1643014800000, 1643025600000, 1643036400000, 1643047200000, 1643058000000, 1643068800000, 1643079600000, 1643090400000, 1643101200000, 1643112000000, 1643122800000, 1643133600000, 1643144400000, 1643155200000, 1643166000000, 1643176800000, 1643187600000, 1643198400000, 1643209200000], // Date Objects
+    labels: [], // Date Objects
     datasets: [{
       label:'temp(℃)',
       backgroundColor: 'rgb(200, 100, 0)',
       borderColor: 'rgb(200, 100, 0)',
       yAxisID: 'y1',
-        data: [-0.69, -1.84, -0.06, 2.04, 2.12, -5.87, -9.62, -11.7, -12.41, -12.23, -1.23, 4.33, 3.7, 0.65, -0.55, -2.42, -2.92, -4.46, 1.36, 3.96, 4.15, 1.37, -0.37, -5.79],
+        data: [],
         fill: false,
         type: 'line',
         order: 1
@@ -147,13 +120,13 @@ const config={
       backgroundColor: 'rgb(100, 100, 100)',
       borderColor: 'rgb(100, 100, 100)',
       yAxisID: 'y2',
-      data:[1034, 1034, 1032, 1027, 1025, 1029, 1031, 1031, 1029, 1026, 1024, 1021, 1020, 1022, 1023, 1023, 1022, 1022, 1021, 1019, 1018, 1023, 1025, 1024],
+      data:[],
         fill: false,
         type: 'line',
         order: 2
       },{
-        label: 'rain(mm)',
-        data: [10, 10, 10, 1, 5, 19, 31, 1, 29, 26, 24, 21, 20, 22, 23, 23, 22, 22, 21, 9, 18, 23, 25, 24],
+        label: 'rain/snow(mm)',
+        data: [],
         borderColor: 'rgb(0, 139, 232)',
         backgroundColor: 'rgb(0, 139, 232)',
             yAxisID: 'y3',
@@ -163,15 +136,15 @@ const config={
     options: {
       title: {
         display: true,
-        text: "Temperature and Pressure"
+        text: "Forecast"
       },
       scales: {
         xAxes: [{
           position: 'top',
           type: 'time',
           time: {
-            min: (1642960800000),
-            max: (1643036400000),
+            min: (0),
+            max: (0),
             minUnit: 'hour',
             tooltipFormat: 'l h:mm a',
             stepSize: 6,
@@ -253,7 +226,7 @@ document.getElementById("chartjs").addEventListener("load", () => {
         type: 'line',
         order: 2
       },{
-        label:'rain(mm)',
+        label:'rain/snow(mm)',
         backgroundColor: 'rgb(0, 100, 200)',
         borderColor: 'rgb(0, 100, 200)',
         yAxisID: 'y3',
@@ -266,7 +239,7 @@ document.getElementById("chartjs").addEventListener("load", () => {
     const chartoption = {
       title: {
         display: true,
-        text: "Temperature and Pressure"
+        text: "Forecast"
       },
       scales: {
         xAxes: [{
