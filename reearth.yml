@@ -28,3 +28,23 @@ extensions:
             - id: cityId
               type: number
               title: City ID
+  - id: currenticonblock
+    type: block
+    name: weather Icon Block
+    schema:
+      groups:
+        - id: default
+          fields:
+            - id: cityId
+              type: number
+              title: City ID
+  - id: weathericon
+    type: widget
+    name: Icon Widget
+    schema:
+      groups:
+        - id: default
+          fields:
+            - id: apiKey
+              type: string
+              title: API Key
