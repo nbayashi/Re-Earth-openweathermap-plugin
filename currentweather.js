@@ -224,7 +224,6 @@ window.addEventListener("message", e => {
   property = e.data.property;
   layers = e.source.reearth.layers.layers;
   if (property.area) {
-    //TODO: add something
   }
   updateLayers();
 });

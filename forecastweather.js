@@ -102,6 +102,7 @@ const html = `
 
 
 
+
 const config={
   type: 'bar',
   data: {
@@ -205,12 +206,30 @@ document.getElementById("chartjs").addEventListener("load", () => {
 });
 
   function updateChart(forecastObj){
+    // set icon
+    let iconArr = Array.from(new Set(forecastObj.forecast[5]));
+    let iconb ={};
+    for (let i = 0; i < iconArr.length; i++) {
+      iconb[iconArr[i]] = new Image();
+      iconb[iconArr[i]].src = 'http://openweathermap.org/img/wn/' + iconArr[i] +'@2x.png';
+      iconb[iconArr[i]].width = 40;
+      iconb[iconArr[i]].height = 40;
+    }
+    Chart.pluginService.register({
+      afterUpdate: function(chart) {
+        for (let i = 0; i < forecastObj.forecast[5].length; i++) {
+        chart.config.data.datasets[3]._meta[0].data[i]._model.pointStyle = iconb[forecastObj.forecast[5][i]];
+        }
+      }
+    });
+
     const chartdata = {
       labels:forecastObj.forecast[0],
       datasets:[{
         label:'temp(℃)',
-        backgroundColor: 'rgb(200, 100, 0)',
-        borderColor: 'rgb(200, 100, 0)',
+        borderWidth:0,
+        backgroundColor: 'rgba(200, 100, 0, 0.8)',
+        borderColor: 'rgba(200, 100, 0, 0.8)',
         yAxisID: 'y1',
         data:forecastObj.forecast[1],
         fill: false,
@@ -218,8 +237,9 @@ document.getElementById("chartjs").addEventListener("load", () => {
         order: 1
       },{
         label:'pressure(hPa)',
-        backgroundColor: 'rgb(100, 100, 100)',
-        borderColor: 'rgb(100, 100, 100)',
+        borderWidth:0,
+        backgroundColor: 'rgba(100, 100, 100, 0.8)',
+        borderColor: 'rgba(100, 100, 100, 0.8)',
         yAxisID: 'y2',
         data:forecastObj.forecast[4],
         fill: false,
@@ -227,13 +247,24 @@ document.getElementById("chartjs").addEventListener("load", () => {
         order: 2
       },{
         label:'rain/snow(mm)',
-        backgroundColor: 'rgb(0, 100, 200)',
-        borderColor: 'rgb(0, 100, 200)',
+        borderWidth:0,
+        backgroundColor: 'rgba(0, 100, 200,0.8)',
+        borderColor: 'rgba(0, 100, 200,0.8)',
         yAxisID: 'y3',
         data:forecastObj.forecast[7],
         fill: false,
         type: 'bar',
         order: 3
+      },{
+        label: '',
+        type: 'line',
+        borderWidth:0,
+        borderColor: 'rgba(0, 0,0,0)',
+        backgroundColor: 'rgba(0, 0, 0,0)',
+        radius:2,
+        data: [0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9],
+            yAxisID: 'y4',
+        order: 4
       }]
     };
     const chartoption = {
@@ -286,6 +317,16 @@ document.getElementById("chartjs").addEventListener("load", () => {
             min:(0),
             stepSize: 5,
             fontColor:'rgb(0, 100, 200)'
+          },
+        },{
+          id: "y4",   // Y軸のID
+          type: "linear",   // linear固定 
+          position: "left", // どちら側に表示される軸か？
+          display:false,
+          ticks: {          // スケール
+            max: 1,
+            min: 0,
+            stepSize: 1
           },
         }]
       },
