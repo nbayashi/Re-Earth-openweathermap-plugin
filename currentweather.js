@@ -223,8 +223,7 @@ window.addEventListener("message", e => {
   if (e.source !== parent) return;
   property = e.data.property;
   layers = e.source.reearth.layers.layers;
-  if (property.area) {
-  }
+
   updateLayers();
 });
 
@@ -245,10 +244,3 @@ function send() {
 }
 
 
-
-
-l = reearth.layers.layers[1]
-reearth.layers.hide(l.id);
-tile2 = tiles[2]
-reearth.visualizer.property.tiles.push[tile2]
-tiles.splice(3, 1);
