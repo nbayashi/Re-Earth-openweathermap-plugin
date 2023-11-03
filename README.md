@@ -19,10 +19,17 @@
 ![](src/img2.png)
 
 ## 使い方
-- OpenWeatherMapにサインインし、API keyを取得します。
-- Current weatherブロックのAPI key入力欄に取得した自身のAPI keyを入力します。
-
+- プラグインをインストールしたら、インフォボックスのブロックから「Current Weather Block」、「Forecast Weather Block」、「Weather Icon Block」を追加します。
+- 「Current Weather Block」は現在時刻の気象情報をインフォボックスに表示します。
+- 「Forecast Weather Block」は3時間毎の気温、気圧、降水量の予測をインフォボックスに表示します。
+- 「Weather Icon Block」はマップのアイコンを天気に合わせたアイコンに変更します。
+- それぞれのBlockの機能を有効にするにはOpenWeatherMapのAPI Keyの設定が必要です。
+  
 ![](src/img3.png)
 
+- API keyはOpenWeatherMapにサインインし、各自のキーを取得してください。
+- Current weatherブロックのAPI key入力欄に取得した自身のAPI keyを入力します。
 - City IDに取得したい地点のIDを入力すると、その場所の情報を表示します。
+![](src/img4.png)
+
 - City IDは[こちら](http://bulk.openweathermap.org/sample/)からお調べください。
