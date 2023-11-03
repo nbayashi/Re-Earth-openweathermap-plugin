@@ -11,13 +11,18 @@
 - 視程
 
 を表示します。
+![](src/img1.png)
+
 
 天気予報は「5 Day / 3 Hour Forecast」より
 3時間ごとの気温、気圧、降水/降雪量をグラフ表示します。
-
+![](src/img2.png)
 
 ## 使い方
 - OpenWeatherMapにサインインし、API keyを取得します。
 - Current weatherブロックのAPI key入力欄に取得した自身のAPI keyを入力します。
+
+![](src/img3.png)
+
 - City IDに取得したい地点のIDを入力すると、その場所の情報を表示します。
 - City IDは[こちら](http://bulk.openweathermap.org/sample/)からお調べください。
