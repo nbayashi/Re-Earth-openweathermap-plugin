@@ -25,7 +25,6 @@
 - 「Weather Icon Block」はマップのアイコンを天気に合わせたアイコンに変更します。
 - それぞれのBlockの機能を有効にするにはOpenWeatherMapのAPI Keyの設定が必要です。
   
-![](src/img3.png)
 
 - API keyはOpenWeatherMapにサインインし、各自のキーを取得してください。
 - Current weatherブロックのAPI key入力欄に取得した自身のAPI keyを入力します。
